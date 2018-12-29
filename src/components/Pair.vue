@@ -1,22 +1,43 @@
 <template>
   <section>
-    <h1>Pair</h1>
-    <div class="search">
-      <vue-single-select v-model="search" :options="['US', 'CN', 'EU']" :required="true"></vue-single-select>
+    <div class="box">
+      <h1>Pair</h1>
+      <div class="field cent">
+        <div class="control">
+          <div class="select is-info">
+            <select v-model="selected">
+              <option v-for="pair in pairs" :key="pair.id">{{ pair.symbol }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import VueSingleSelect from "vue-single-select";
+
 const ccxt = require("ccxt");
+const exchanges = ccxt.exchanges;
+
+async function getMarkets() {
+  let acx = new ccxt.acx();
+  let markets = await acx.load_markets();
+  return markets;
+}
+
+let pairs;
+
 export default {
   data() {
     return {
-      search: ""
+      selected: "",
+      pairs
     };
   },
-  created() {
+  mounted() {
+    getMarkets().then(markets => (this.pairs = markets));
   },
   components: {
     VueSingleSelect
@@ -25,12 +46,17 @@ export default {
 </script>
 
 <style scoped>
-section {
-  border: 1px solid green;
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+h1 {
+  font-size: 35px;
 }
 
 .search {
   width: 400px;
+  margin: 0 auto;
+}
+
+.cent {
   margin: 0 auto;
 }
 </style>

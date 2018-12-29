@@ -10,7 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "bulma": "^0.7.2",
     "ccxt": "^1.18.75",
+    "ccxt-trading-cp": "^1.2.5",
     "vue": "^2.5.2",
     "vue-single-select": "^1.0.29"
   },

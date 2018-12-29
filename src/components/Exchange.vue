@@ -1,14 +1,24 @@
 <template>
-  <section>
-    <h1>Exchange</h1>
-    <div class="search">
-      <vue-single-select v-model="search" :options="results" :required="true"></vue-single-select>
+   <section>
+    <div class="box">
+      <h1>Exchange</h1>
+      <div class="field">
+        <div class="control">
+          <div class="select is-info">
+            <select v-model="search">
+              <option v-for="res in results" :key="res.id">{{ res }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
+    <pair></pair>
   </section>
 </template>
 
 <script>
 import VueSingleSelect from "vue-single-select";
+import Pair from "./Pair";
 const ccxt = require("ccxt");
 export default {
   data() {
@@ -22,7 +32,8 @@ export default {
     this.results = ccxt.exchanges;
   },
   components: {
-    VueSingleSelect
+    VueSingleSelect,
+    Pair
   }
 };
 </script>
@@ -33,8 +44,8 @@ export default {
   margin: 0 auto;
 }
 
-section {
-  border: 1px solid purple;
+h1 {
+  font-size: 35px;
 }
 </style>
 
