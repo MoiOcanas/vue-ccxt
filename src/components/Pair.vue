@@ -1,12 +1,13 @@
 <template>
   <section>
-    <div class="box">
-      <h1>Pair</h1>
+    <div class="notification is-link">
+      <h1>Pair <i class="fas fa-money-bill-alt fa-xs"></i></h1>
       <div class="field cent">
         <div class="control">
           <div class="select is-info">
-            <select v-model="selected">
-              <option v-for="pair in pairs" :key="pair.id">{{ pair.symbol }}</option>
+            <select :value="pair.symbol" @change="getP">
+              <option disabled value="">Select a pair</option>
+              <option v-for="pair in pairs" :value="pair.symbol" :key="pair.id">{{ pair.symbol }}</option>
             </select>
           </div>
         </div>
@@ -16,31 +17,24 @@
 </template>
 
 <script>
-import VueSingleSelect from "vue-single-select";
-
-const ccxt = require("ccxt");
-const exchanges = ccxt.exchanges;
-
-async function getMarkets() {
-  let acx = new ccxt.acx();
-  let markets = await acx.load_markets();
-  return markets;
-}
-
-let pairs;
+import { mapActions } from 'vuex'
 
 export default {
-  data() {
-    return {
-      selected: "",
-      pairs
-    };
+  computed: {
+    pairs () {
+      return this.$store.state.pairs
+    },
+    pair () {
+      return this.$store.state.pair
+    }
   },
-  mounted() {
-    getMarkets().then(markets => (this.pairs = markets));
-  },
-  components: {
-    VueSingleSelect
+  methods: {
+    ...mapActions(['getPair', 'getTrades']),
+    getP (e) {
+      let pair = e.target.value
+      this.getPair(pair)
+      this.getTrades()
+    }
   }
 };
 </script>

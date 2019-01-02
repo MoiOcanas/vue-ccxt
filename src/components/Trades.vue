@@ -1,8 +1,8 @@
 <template>
   <section>
-    <div class="box">
-      <h1>Trades</h1>
-      <table class="table is-bordered is-fullwidth">
+    <div class="notification is-info">
+      <h1>Trades <i class="fas fa-business-time fa-xs"></i></h1>
+      <table class="table is-bordered is-fullwidth over">
         <thead>
           <tr>
             <th>Size</th>
@@ -11,8 +11,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="trade in data" :key="trade.id">
-            <td>{{ trade.symbol }}</td>
+          <tr v-for="trade in trades" :key="trade.id">
+            <td>{{ trade.amount }}</td>
+            <td>{{ trade.price }}</td>
+            <td>{{ trade.datetime.slice(12, 19) }}</td>
           </tr>
         </tbody>
       </table>
@@ -21,23 +23,10 @@
 </template>
 
 <script>
-const ccxt = require("ccxt");
-let acx = new ccxt.acx();
-
-let data;
 export default {
-  data() {
-    return {
-      data
-    };
-  },
-  mounted() {
-    if (acx.has["fetchTrades"]) {
-      let sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-      for (symbol in acx.markets) {
-        sleep(acx.rateLimit); // milliseconds
-        console.log(acx.fetchTrades(symbol));
-      }
+  computed: {
+    trades() {
+      return this.$store.state.trades
     }
   }
 };
@@ -46,5 +35,9 @@ export default {
 <style scoped>
 h1 {
   font-size: 35px;
+}
+
+.over {
+  overflow: scroll;
 }
 </style>

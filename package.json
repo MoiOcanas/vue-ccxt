@@ -13,8 +13,13 @@
     "bulma": "^0.7.2",
     "ccxt": "^1.18.75",
     "ccxt-trading-cp": "^1.2.5",
+    "cors": "^2.8.5",
+    "cors-anywhere": "^0.4.1",
     "vue": "^2.5.2",
-    "vue-single-select": "^1.0.29"
+    "vue-property-decorator": "^7.2.0",
+    "vue-router": "^3.0.2",
+    "vue-single-select": "^1.0.29",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
