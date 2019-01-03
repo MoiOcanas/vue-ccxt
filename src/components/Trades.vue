@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name:'Trades',
   computed: {
     trades() {
       return this.$store.state.trades

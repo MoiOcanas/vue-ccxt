@@ -25,6 +25,7 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+  name:'Exchange',
   computed: {
     exchanges() {
       return this.$store.state.exchanges;

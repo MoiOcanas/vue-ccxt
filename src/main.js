@@ -3,10 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 
+//Golden layout
+import vgl from 'vue-golden-layout'
+
 //Tools
 import store from './store/store'
 
 Vue.config.productionTip = false
+Vue.use(vgl)
 
 /* eslint-disable no-new */
 new Vue({

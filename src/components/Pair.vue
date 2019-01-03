@@ -20,6 +20,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  name:'Pair',
   computed: {
     pairs () {
       return this.$store.state.pairs
